@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>with the dawn breaking - Reader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app">
+        <header class="app-header">
+            <button id="menu-btn" class="icon-btn"><i class="ph ph-list"></i></button>
+            <h1 class="logo">with the dawn breaking</h1>
+            <div class="header-right">
+                <button id="bgm-btn" class="icon-btn" aria-label="Toggle BGM">
+                    <i class="ph ph-music-note"></i>
+                </button>
+                <button id="search-btn" class="icon-btn"><i class="ph ph-magnifying-glass"></i></button>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <!-- Dynamic Content will be injected here -->
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-target="home">
+                <i class="ph ph-house"></i>
+                <span>Home</span>
+            </button>
+            <button class="nav-item" data-target="categories">
+                <i class="ph ph-squares-four"></i>
+                <span>Categories</span>
+            </button>
+            <button class="nav-item" data-target="about">
+                <i class="ph ph-info"></i>
+                <span>About</span>
+            </button>
+        </nav>
+        <div id="overlay" class="overlay"></div>
+
+        <aside id="sidebar" class="sidebar">
+            <button id="close-sidebar-btn" class="icon-btn close-btn"><i class="ph ph-x"></i></button>
+            <nav class="sidebar-nav">
+                <button class="sidebar-item" data-target="home">
+                    <i class="ph ph-house"></i> Home
+                </button>
+                <button class="sidebar-item" data-target="categories">
+                    <i class="ph ph-squares-four"></i> Categories
+                </button>
+                <button class="sidebar-item" data-target="about">
+                    <i class="ph ph-info"></i> About
+                </button>
+            </nav>
+        </aside>
+
+        <div id="search-overlay" class="search-overlay">
+            <div class="search-header">
+                <input type="text" id="search-input" placeholder="Search articles...">
+                <button id="close-search-btn" class="icon-btn close-btn"><i class="ph ph-x"></i></button>
+            </div>
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </div>
+
+    <audio id="bgm-audio" loop>
+        <!-- Sample ambient track fitting the theme -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
