@@ -39,15 +39,15 @@ async function fetchPosts() {
         const response = await fetch('https://butterflyandtea.com/wp-json/wp/v2/posts?_embed&per_page=10');
         const data = await response.json();
 
-        posts = data.map(post => {
+        // 重複を削除する魔法のコード
+        const uniqueData = data.filter((v, i, a) => a.findIndex(t => t.id === v.id) === i);
+        posts = uniqueData.map(post => {
             // Extract category
             const categoryTerm = post._embedded && post._embedded['wp:term'] && post._embedded['wp:term'][0] && post._embedded['wp:term'][0][0]
                 ? post._embedded['wp:term'][0][0].name
                 : 'Uncategorized';
 
-            if (categoryTerm === '深層心理学') {
-                categoryTerm = '意識の深層';
-            }
+
 
             // Extract image
             const imageUrl = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]
