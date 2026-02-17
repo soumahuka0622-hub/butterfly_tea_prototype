@@ -45,6 +45,10 @@ async function fetchPosts() {
                 ? post._embedded['wp:term'][0][0].name
                 : 'Uncategorized';
 
+            if (categoryTerm === '深層心理学') {
+                categoryTerm = '意識の深層';
+            }
+
             // Extract image
             const imageUrl = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]
                 ? post._embedded['wp:featuredmedia'][0].source_url
@@ -72,7 +76,7 @@ async function fetchPosts() {
             title: "宿命論的予測から主体的創造へ：占術における「的中」のパラドックスと自己救済の深層心理学的研究",
             excerpt: "予測の枠組みを超越した「変容の伴走者」としての新しい占い師像。占術が提供する最も直接的な価値が「予測の正確性」にあるという通俗的な言説に対し、心理学的な視点から「的中」のパラドックスを考察する。",
             date: "2026.02.17",
-            category: "深層心理学",
+            category: "意識の深層",
             image: "https://butterflyandtea.com/wp-content/uploads/2026/02/auuuyuu.jpg",
             link: "https://butterflyandtea.com/the-paradox-of-accuracy-in-divination/",
             content: `
