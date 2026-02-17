@@ -73,7 +73,7 @@ async function fetchPosts() {
             excerpt: "予測の枠組みを超越した「変容の伴走者」としての新しい占い師像。占術が提供する最も直接的な価値が「予測の正確性」にあるという通俗的な言説に対し、心理学的な視点から「的中」のパラドックスを考察する。",
             date: "2026.02.17",
             category: "深層心理学",
-            image: "https://placehold.co/600x400/2a1b3d/ffffff?text=Paradox+of+Accuracy",
+            image: "https://butterflyandtea.com/wp-content/uploads/2026/02/auuuyuu.jpg",
             link: "https://butterflyandtea.com/the-paradox-of-accuracy-in-divination/",
             content: `
                 <h2>序論：占術における「的中」の多義的機能</h2>
