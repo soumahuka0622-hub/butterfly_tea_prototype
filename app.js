@@ -206,6 +206,13 @@ async function fetchPosts() {
 
         posts.unshift(manualPost);
 
+        // 重複をタイトルで削除（IDが異なる手動投稿とAPI投稿の重複を防ぐ）
+        posts = posts.filter((post, index, self) =>
+            index === self.findIndex((t) => (
+                t.title === post.title
+            ))
+        );
+
         // Extract unique categories
         categories = [...new Set(posts.map(post => post.category))];
 
