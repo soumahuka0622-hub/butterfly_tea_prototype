@@ -71,7 +71,21 @@ async function fetchPosts() {
         });
 // (省略) 前半の fetch 処理など ...
 
-        
+          // Manual Injection of New Article (Latest Update)
+        const manualPost = {
+            id: 100001, // IDを新しくして重複を避ける
+            title: "【最新】サイトの更新とシステム最適化のお知らせ",
+            excerpt: "最新の記事が正常に表示されるよう、システムの並び替えルールと手動挿入データを更新しました。今後はWordPressの投稿がスムーズに反映されます。",
+            date: "2026.02.20",
+            category: "お知らせ",
+            image: "https://butterflyandtea.com/wp-content/uploads/2026/02/auuuyuu.jpg",
+            link: "https://butterflyandtea.com/",
+            content: `
+                <h2>最新記事の表示について</h2>
+                <p>いつもご覧いただきありがとうございます。現在、サイトの表示順を最適化する為、プログラムの調整を行っています。</p>
+                <p>この記事が一番上に表示されている間は、システムが最新の状態に保たれています。この下の「最新記事一覧」の中に正しい日付順で並んでいます。</p>
+            `
+        };
 
         // 既存の記事の一番上に追加
         posts.unshift(manualPost);
