@@ -80,10 +80,7 @@ async function fetchPosts() {
             category: "お知らせ",
             image: "https://butterflyandtea.com/wp-content/uploads/2026/01/999999.jpg",
             link: "https://butterflyandtea.com/",
-            content: `
-                <p>いつも訪れていただき、ありがとうございます。</p>
-                <p>現在、サイトがよりスムーズに「今」を映し出せるよう、表示の仕組みを最適化しました。これにより、新しく綴られた言葉が迷うことなく、一番新しい記録として一番上に届くようになります。</p>
-            `
+            content: "" // 複雑なタグは一切入れない
         };
 
         // 既存の記事の一番上に追加
