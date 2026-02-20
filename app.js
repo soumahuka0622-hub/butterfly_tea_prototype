@@ -71,7 +71,20 @@ async function fetchPosts() {
         });
 // (省略) 前半の fetch 処理など ...
 
-        
+        // Manual Injection of New Article (Latest Update)
+        const manualPost = {
+            id: 100001,
+            title: "【最新】サイトの表示順と記事の同期について",
+            excerpt: "現在、最新の記事が常に一番上に届くよう、時の流れを整えています。WordPressの新しい投稿も、このメッセージの下に順次重なっていきます。",
+            date: "2026.02.20",
+            category: "お知らせ",
+            image: "https://butterflyandtea.com/wp-content/uploads/2026/01/999999.jpg",
+            link: "https://butterflyandtea.com/",
+            content: `
+                <p>いつも訪れていただき、ありがとうございます。</p>
+                <p>現在、サイトがよりスムーズに「今」を映し出せるよう、表示の仕組みを最適化しました。これにより、新しく綴られた言葉が迷うことなく、一番新しい記録として一番上に届くようになります。</p>
+            `
+        };
 
         // 既存の記事の一番上に追加
         posts.unshift(manualPost);
