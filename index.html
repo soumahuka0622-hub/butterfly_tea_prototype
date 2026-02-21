@@ -72,11 +72,23 @@
         </div>
     </div>
 
-    <audio id="bgm-audio" src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c330df3030.mp3" loop></audio>
+    <audio id="bgm-audio" loop>
+        <!-- 安定したテスト用URL (SoundHelix) を一時的に設定 -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+
+        <!-- ▼ 使いたい曲がある場合は、上の <source> を消して下のどちらかのコメントアウトを外してください ▼ -->
+        <!-- "Deep Space Meditation" (by Music_Unlimited) -->
+        <!-- <source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_9b65dc9bdf.mp3" type="audio/mpeg"> -->
+
+        <!-- "Galaxy Exploration" (by Lexin_Music) -->
+        <!-- <source src="https://cdn.pixabay.com/download/audio/2022/01/21/audio_31743c58bb.mp3" type="audio/mpeg"> -->
+    </audio>
 
     <script>
-        // BGMの音量を30%に初期設定（ヒーリング系に最適）
-        document.getElementById('bgm-audio').volume = 0.3;
+        // BGMの再生設定
+        const bgmAudio = document.getElementById('bgm-audio');
+        bgmAudio.volume = 0.1; // ヒーリング系、より静かに心地よく
+        bgmAudio.loop = true;  // ループ再生
     </script>
 
     <script src="app.js"></script>
