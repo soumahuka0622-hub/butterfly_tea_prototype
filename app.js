@@ -82,7 +82,7 @@ async function fetchPosts() {
             excerpt: "サイトの表示順を最適化しました。ここには常に新しい記録が届きます。",
             date: "2026.02.21",
             category: "お知らせ",
-            image: "https://butterflyandtea.com/wp-content/uploads/2026/02/auuuyuu.jpg",
+            image: "https://butterflyandtea.com/wp-content/uploads/2026/01/999999.jpg",
             link: "https://butterflyandtea.com/",
             // styleタグを使って、このカード内だけ画像を枠に収める
             content: "<style>img { max-width: 100% !important; height: auto !important; position: static !important; }</style>"
