@@ -36,7 +36,10 @@ async function init() {
 // Fetch Data
 async function fetchPosts() {
     try {
-        const response = await fetch('https://butterflyandtea.com/wp-json/wp/v2/posts?_embed&per_page=10');
+        const apiUrl = `https://butterflyandtea.com/wp-json/wp/v2/posts?_embed&per_page=10&_=${Date.now()}`;
+        const response = await fetch(apiUrl, {
+            cache: 'no-store'
+        });
         const data = await response.json();
 
         // 重複を削除する魔法のコード
@@ -69,24 +72,26 @@ async function fetchPosts() {
                 link: post.link
             };
         });
-// (省略) 前半の fetch 処理など ...
+        // (省略) 前半の fetch 処理など ...
 
-        // Manual Injection of New Article (Latest Update)
+        // Manual Injection (物理的にはみ出しを抑制する版)
         const manualPost = {
             id: 100001,
-            title: "【最新】サイトの表示順と記事の同期について",
-            excerpt: "現在、最新の記事が常に一番上に届くよう、時の流れを整えています。WordPressの新しい投稿も、このメッセージの下に順次重なっていきます。",
-            date: "2026.02.20",
+            title: "【最新】時の重なりを、より鮮明に",
+            // 抜粋をあえて極限まで短くして、重なりを防ぐ
+            excerpt: "サイトの表示順を最適化しました。ここには常に新しい記録が届きます。",
+            date: "2026.02.21",
             category: "お知らせ",
-            image: "https://butterflyandtea.com/wp-content/uploads/2026/01/999999.jpg",
+            image: "https://butterflyandtea.com/wp-content/uploads/2026/02/auuuyuu.jpg",
             link: "https://butterflyandtea.com/",
-            content: "" // 複雑なタグは一切入れない
+            // styleタグを使って、このカード内だけ画像を枠に収める
+            content: "<style>img { max-width: 100% !important; height: auto !important; position: static !important; }</style>"
         };
 
-        // 既存の記事の一番上に追加
+        // 一番上に追加
         posts.unshift(manualPost);
 
-        // 重複をタイトルで削除（IDが異なる手動投稿とAPI投稿の重複を防ぐ）
+        // 重複を除去（これでWordPress側の同じ記事を消す）
         posts = posts.filter((post, index, self) =>
             index === self.findIndex((t) => (
                 t.title === post.title

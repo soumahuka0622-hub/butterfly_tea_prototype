@@ -31,12 +31,18 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 body {
     font-family: var(--font-main);
     background-color: var(--bg-secondary);
     color: var(--text-primary);
     line-height: 1.6;
     height: 100vh;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
 }
@@ -50,6 +56,7 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
     text-align: justify;
     word-break: break-all;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
 }
@@ -105,6 +112,7 @@ main {
 #main-content {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding-bottom: calc(var(--bottom-nav-height) + var(--spacing-lg));
 }
 
@@ -131,6 +139,8 @@ main {
     margin-bottom: var(--spacing-xs);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .hero-title {
@@ -158,10 +168,12 @@ main {
 
 .post-item {
     display: flex;
+    min-width: 0;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
     border-bottom: 1px solid var(--border-color);
     padding-bottom: var(--spacing-lg);
+    align-items: flex-start;
     cursor: pointer;
     animation: fadeIn 0.5s ease-out;
 }
@@ -181,6 +193,7 @@ main {
 
 .post-info {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -192,6 +205,25 @@ main {
     margin-bottom: var(--spacing-xs);
     font-weight: 500;
     line-height: 1.5;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@media (max-width: 380px) {
+    .post-thumb {
+        width: 88px;
+        height: 88px;
+    }
+
+    .post-title {
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+    }
 }
 
 /* Bottom Nav */
@@ -259,6 +291,8 @@ main {
     color: var(--deep-purple);
     margin-bottom: var(--spacing-sm);
     line-height: 1.4;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .article-meta-row {
