@@ -36,7 +36,7 @@ async function init() {
 // Fetch Data
 async function fetchPosts() {
     try {
-        const apiUrl = `https://butterflyandtea.com/wp-json/wp/v2/posts?_embed&per_page=10&_=${Date.now()}`;
+        const apiUrl = `https://butterflyandtea.com/wp-json/wp/v2/posts?_embed&per_page=20&_=${Date.now()}`;
         const response = await fetch(apiUrl, {
             cache: 'no-store'
         });

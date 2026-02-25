@@ -1,7 +1,7 @@
 
 const https = require('https');
 
-const url = 'https://butterflyandtea.com/wp-json/wp/v2/posts?_embed&per_page=10';
+const url = 'https://butterflyandtea.com/wp-json/wp/v2/posts?_embed&per_page=20';
 
 https.get(url, (res) => {
     let data = '';
