@@ -425,6 +425,8 @@ main {
 .category-name {
     font-weight: 500;
     color: var(--deep-purple);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
 }
 
 
