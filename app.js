@@ -4,7 +4,8 @@ let categories = [];
 let currentPage = 'home';
 const additionalCategoryLinks = [
     { name: 'AI時代', url: 'https://butterflyandtea.com/tag/the-ai-era/' },
-    { name: '食と身体の安全', url: 'https://butterflyandtea.com/tag/food-and-body-safety/' }
+    { name: '食と身体の安全', url: 'https://butterflyandtea.com/tag/food-and-body-safety/' },
+    { name: '心の探究', url: 'https://butterflyandtea.com/category/a-quest-for-the-heart/' }
 ];
 
 // DOM Elements
