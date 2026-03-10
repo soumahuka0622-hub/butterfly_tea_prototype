@@ -308,13 +308,20 @@ function renderPost(post) {
 }
 
 function renderCategories() {
+    const normalizedCategoryNames = new Set(
+        categories.map(cat => cat.trim().toLowerCase())
+    );
     const categoriesHtml = categories.map(cat => `
     <div class="category-card" onclick="viewCategory('${cat}')">
     <div class="category-name">${cat}</div>
         </div>
     `).join('');
     const additionalCategoriesHtml = additionalCategoryLinks
-        .filter(extra => !categories.includes(extra.name))
+        .filter((extra, index, self) => {
+            const normalized = extra.name.trim().toLowerCase();
+            return !normalizedCategoryNames.has(normalized)
+                && index === self.findIndex(item => item.name.trim().toLowerCase() === normalized);
+        })
         .map(extra => `
     <a class="category-card" href="${extra.url}" target="_blank" rel="noopener noreferrer">
     <div class="category-name">${extra.name}</div>
