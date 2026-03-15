@@ -316,10 +316,14 @@ function renderPost(post) {
 }
 
 function renderCategories() {
-    const normalizedCategoryNames = new Set(
-        categories.map(cat => cat.trim().toLowerCase())
-    );
-    const categoriesHtml = categories.map(cat => `
+    const normalizedCategoryNames = new Set();
+    const uniqueCategories = categories.filter(cat => {
+        const normalized = cat.trim().toLowerCase();
+        if (normalizedCategoryNames.has(normalized)) return false;
+        normalizedCategoryNames.add(normalized);
+        return true;
+    });
+    const categoriesHtml = uniqueCategories.map(cat => `
     <div class="category-card" onclick="viewCategory('${cat}')">
     <div class="category-name">${cat}</div>
         </div>
