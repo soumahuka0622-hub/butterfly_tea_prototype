@@ -305,6 +305,13 @@ function renderPost(post) {
         </div>
     `;
     window.scrollTo(0, 0);
+    // Enable reveal animations embedded in post HTML
+    const revealNodes = document.querySelectorAll('.article-body .cy-reveal');
+    if (revealNodes.length > 0) {
+        requestAnimationFrame(() => {
+            revealNodes.forEach(node => node.classList.add('visible'));
+        });
+    }
 }
 
 function renderCategories() {
