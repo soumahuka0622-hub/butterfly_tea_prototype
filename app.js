@@ -307,7 +307,11 @@ function renderPost(post) {
     `;
     window.scrollTo(0, 0);
     // Enable reveal animations embedded in post HTML
-    const revealNodes = document.querySelectorAll('.article-body .cy-reveal');
+    const revealSelectors = [
+        '.article-body .cy-reveal',
+        '.article-body .wp-reveal'
+    ];
+    const revealNodes = document.querySelectorAll(revealSelectors.join(','));
     if (revealNodes.length > 0) {
         requestAnimationFrame(() => {
             revealNodes.forEach(node => node.classList.add('visible'));
