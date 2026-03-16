@@ -310,7 +310,9 @@ function renderPost(post) {
     const revealSelectors = [
         '.article-body .cy-reveal',
         '.article-body .wp-reveal',
-        '.article-body .fade-in'
+        '.article-body .fade-in',
+        '.article-body .section-block',
+        '.article-body [data-scroll]'
     ];
     const revealNodes = document.querySelectorAll(revealSelectors.join(','));
     if (revealNodes.length > 0) {
