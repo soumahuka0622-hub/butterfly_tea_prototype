@@ -309,7 +309,8 @@ function renderPost(post) {
     // Enable reveal animations embedded in post HTML
     const revealSelectors = [
         '.article-body .cy-reveal',
-        '.article-body .wp-reveal'
+        '.article-body .wp-reveal',
+        '.article-body .fade-in'
     ];
     const revealNodes = document.querySelectorAll(revealSelectors.join(','));
     if (revealNodes.length > 0) {
