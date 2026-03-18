@@ -307,15 +307,16 @@ function renderPost(post) {
     `;
     window.scrollTo(0, 0);
     // Enable reveal animations embedded in post HTML
-    const revealSelectors = [
-        '.article-body .cy-reveal',
-        '.article-body .wp-reveal',
-        '.article-body .fade-in',
-        '.article-body .section-block',
-        '.article-body [data-scroll]',
-        '.article-body .liminal-fade'
+  const revealSelectors = [
+  '.article-body .cy-reveal',
+  '.article-body .wp-reveal',
+  '.article-body .fade-in',
+  '.article-body .section-block',
+  '.article-body [data-scroll]',
+  '.article-body .liminal-fade',
+  '.article-body .cs-reveal'
+];
 
-    ];
     const revealNodes = document.querySelectorAll(revealSelectors.join(','));
     if (revealNodes.length > 0) {
         requestAnimationFrame(() => {
