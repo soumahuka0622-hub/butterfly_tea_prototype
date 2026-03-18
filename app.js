@@ -313,8 +313,7 @@ function renderPost(post) {
   '.article-body .fade-in',
   '.article-body .section-block',
   '.article-body [data-scroll]',
-  '.article-body .liminal-fade',
-  '.article-body .cs-reveal'
+  '.article-body .liminal-fade'
 ];
 
     const revealNodes = document.querySelectorAll(revealSelectors.join(','));
