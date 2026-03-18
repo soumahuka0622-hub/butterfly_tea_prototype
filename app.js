@@ -307,20 +307,26 @@ function renderPost(post) {
     `;
     window.scrollTo(0, 0);
     // Enable reveal animations embedded in post HTML
-  const revealSelectors = [
-  '.article-body .cy-reveal',
-  '.article-body .wp-reveal',
-  '.article-body .fade-in',
-  '.article-body .section-block',
-  '.article-body [data-scroll]',
-  '.article-body .liminal-fade'
-];
-
+    const revealSelectors = [
+        '.article-body .cy-reveal',
+        '.article-body .wp-reveal',
+        '.article-body .fade-in',
+        '.article-body .section-block',
+        '.article-body [data-scroll]',
+        '.article-body .liminal-fade',
+        '.article-body .cs-reveal'
+    ];
     const revealNodes = document.querySelectorAll(revealSelectors.join(','));
     if (revealNodes.length > 0) {
-        requestAnimationFrame(() => {
-            revealNodes.forEach(node => node.classList.add('visible'));
-        });
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        revealNodes.forEach(node => observer.observe(node));
     }
 }
 
