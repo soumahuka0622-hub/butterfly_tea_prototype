@@ -316,7 +316,8 @@ function renderPost(post) {
         '.article-body .liminal-fade',
         '.article-body .cs-reveal',
         '.article-body .arc-reveal',
-        '.arc-wrap .arc-reveal'
+        '.arc-wrap .arc-reveal',
+        '.article-body .hc-reveal'
     ];
     const revealNodes = document.querySelectorAll(revealSelectors.join(','));
     if (revealNodes.length > 0) {
