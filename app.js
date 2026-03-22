@@ -317,7 +317,8 @@ function renderPost(post) {
         '.article-body .cs-reveal',
         '.article-body .arc-reveal',
         '.arc-wrap .arc-reveal',
-        '.article-body .hc-reveal'
+        '.article-body .hc-reveal',
+        '.article-body .km-reveal'
     ];
     const revealNodes = document.querySelectorAll(revealSelectors.join(','));
     if (revealNodes.length > 0) {
