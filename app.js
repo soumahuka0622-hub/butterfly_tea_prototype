@@ -318,7 +318,8 @@ function renderPost(post) {
         '.article-body .arc-reveal',
         '.arc-wrap .arc-reveal',
         '.article-body .hc-reveal',
-        '.article-body .km-reveal'
+        '.article-body .km-reveal',
+        '.article-body .chapter'
     ];
     const revealNodes = document.querySelectorAll(revealSelectors.join(','));
     if (revealNodes.length > 0) {
