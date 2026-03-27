@@ -316,6 +316,7 @@ function renderPost(post) {
         '.article-body .wp-reveal',
         '.article-body .fade-in',
         '.article-body .section-block',
+        '.article-body .section',
         '.article-body [data-scroll]',
         '.article-body .liminal-fade',
         '.article-body .cs-reveal',
