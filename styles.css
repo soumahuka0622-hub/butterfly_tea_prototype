@@ -276,6 +276,12 @@ main {
     }
 }
 
+.visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
 /* Article Detail */
 .article-detail {
     padding: var(--spacing-md);

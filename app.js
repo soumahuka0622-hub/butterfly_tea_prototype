@@ -35,8 +35,10 @@ async function init() {
     // Show loading state
     mainContent.innerHTML = '<div style="text-align:center; padding: 50px;"><p>Loading articles...</p></div>';
 
-    await fetchPosts();
-    renderHome();
+    const success = await fetchPosts();
+    if (success) {
+        renderHome();
+    }
 }
 
 // Fetch Data
@@ -106,9 +108,11 @@ async function fetchPosts() {
         // Extract unique categories
         categories = [...new Set(posts.map(post => post.category))];
 
+        return true;
     } catch (error) {
         console.error('Error fetching posts:', error);
-        mainContent.innerHTML = '<div style="text-align:center; padding: 50px;"><p>Failed to load articles. Please check your connection.</p></div>';
+        mainContent.innerHTML = '<div style="text-align:center; padding: 50px;"><p>Failed to load articles. Please check your connection (or the WordPress API might be returning an empty response).</p></div>';
+        return false;
     }
 }
 
@@ -327,6 +331,9 @@ function renderPost(post) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    entry.target.style.setProperty('opacity', '1', 'important');
+                    entry.target.style.setProperty('visibility', 'visible', 'important');
+                    entry.target.style.setProperty('transform', 'none', 'important');
                     obs.unobserve(entry.target);
                 }
             });
