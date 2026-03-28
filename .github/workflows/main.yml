@@ -12,6 +12,6 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
       - name: Run Duplicate Check
         run: node check_api_duplicates.js # あなたの作ったファイルを動かす
