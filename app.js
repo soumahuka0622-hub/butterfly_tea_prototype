@@ -324,7 +324,8 @@ function renderPost(post) {
         '.arc-wrap .arc-reveal',
         '.article-body .hc-reveal',
         '.article-body .km-reveal',
-        '.article-body .chapter'
+        '.article-body .chapter',
+        '.article-body .bio-section'
     ];
     const revealNodes = document.querySelectorAll(revealSelectors.join(','));
     if (revealNodes.length > 0) {
