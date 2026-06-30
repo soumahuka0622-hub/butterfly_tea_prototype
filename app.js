@@ -6,7 +6,8 @@ const additionalCategoryLinks = [
     { name: 'AI時代', url: 'https://butterflyandtea.com/tag/the-ai-era/' },
     { name: '食と身体の安全', url: 'https://butterflyandtea.com/tag/food-and-body-safety/' },
     { name: '心の探究', url: 'https://butterflyandtea.com/category/a-quest-for-the-heart/' },
-    { name: '天才とは', url: 'https://butterflyandtea.com/tag/what-is-genius/' }
+    { name: '天才とは', url: 'https://butterflyandtea.com/tag/what-is-genius/' },
+    { name: '夜明け前の詩', url: 'https://butterflyandtea.com/tag/%e5%a4%9c%e6%98%8e%e3%81%91%e5%89%8d%e3%81%ae%e8%a9%a9/' }
 ];
 
 // DOM Elements
