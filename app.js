@@ -297,6 +297,7 @@ function renderPost(post) {
         '.article-body .cy-reveal',
         '.article-body .wp-reveal',
         '.article-body .fade-in',
+        '.article-body .reveal',
         '.article-body .section-block',
         '.article-body .section',
         '.article-body [data-scroll]',
@@ -315,6 +316,7 @@ function renderPost(post) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    entry.target.classList.add('is-visible');
                     entry.target.style.setProperty('opacity', '1', 'important');
                     entry.target.style.setProperty('visibility', 'visible', 'important');
                     entry.target.style.setProperty('transform', 'none', 'important');
