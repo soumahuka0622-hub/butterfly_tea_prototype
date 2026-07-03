@@ -49,6 +49,7 @@ body {
 
 #app {
     max-width: 600px;
+    width: 100%;
     /* Mobile focused max-width */
     margin: 0 auto;
     background-color: var(--bg-primary);
@@ -111,6 +112,11 @@ main {
 /* Main Content */
 #main-content {
     flex: 1;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
     overflow-y: auto;
     overflow-x: hidden;
     padding-bottom: calc(var(--bottom-nav-height) + var(--spacing-lg));
@@ -286,6 +292,9 @@ main {
 .article-detail {
     padding: var(--spacing-md);
     animation: fadeIn 0.3s ease-out;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .article-header {
@@ -310,15 +319,84 @@ main {
 
 .article-image {
     width: 100%;
+    max-width: 100%;
     height: auto;
     border-radius: 4px;
     margin-bottom: var(--spacing-lg);
+    display: block;
 }
 
 .article-body {
     font-size: 1rem;
     line-height: 2;
     color: var(--text-primary);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.article-body *,
+.article-body *::before,
+.article-body *::after {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.article-body img,
+.article-body video,
+.article-body canvas,
+.article-body svg,
+.article-body iframe,
+.article-body embed,
+.article-body object {
+    max-width: 100% !important;
+}
+
+.article-body img,
+.article-body video,
+.article-body canvas,
+.article-body svg {
+    height: auto !important;
+}
+
+.article-body img,
+.article-body video,
+.article-body canvas {
+    display: block;
+}
+
+.article-body iframe,
+.article-body embed,
+.article-body object {
+    display: block;
+    width: 100% !important;
+}
+
+.article-body figure,
+.article-body .wp-block-image,
+.article-body .wp-block-embed,
+.article-body .wp-block-video,
+.article-body .wp-block-gallery,
+.article-body .wp-block-columns,
+.article-body [class*="wp-block-"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.article-body table {
+    width: 100%;
+    max-width: 100%;
+}
+
+.article-body pre,
+.article-body code,
+.article-body table {
+    overflow-x: auto;
+    white-space: pre-wrap;
 }
 
 .article-body p {

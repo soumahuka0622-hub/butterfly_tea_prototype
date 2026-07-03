@@ -81,26 +81,7 @@ async function fetchPosts() {
                 link: post.link
             };
         });
-        // (省略) 前半の fetch 処理など ...
-
-        // Manual Injection (物理的にはみ出しを抑制する版)
-        const manualPost = {
-            id: 100001,
-            title: "【最新】時の重なりを、より鮮明に",
-            // 抜粋をあえて極限まで短くして、重なりを防ぐ
-            excerpt: "サイトの表示順を最適化しました。ここには常に新しい記録が届きます。",
-            date: "2026.02.21",
-            category: "お知らせ",
-            image: "https://butterflyandtea.com/wp-content/uploads/2026/01/999999.jpg",
-            link: "https://butterflyandtea.com/",
-            // styleタグを使って、このカード内だけ画像を枠に収める
-            content: "<style>img { max-width: 100% !important; height: auto !important; position: static !important; }</style>"
-        };
-
-        // 一番上に追加
-        posts.unshift(manualPost);
-
-        // 重複を除去（これでWordPress側の同じ記事を消す）
+        // 重複を除去
         posts = posts.filter((post, index, self) =>
             index === self.findIndex((t) => (
                 t.title === post.title
