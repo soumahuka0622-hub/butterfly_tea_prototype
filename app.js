@@ -293,7 +293,7 @@ function renderPost(post) {
     `;
     window.scrollTo(0, 0);
     // Enable reveal animations embedded in post HTML
-    const revealSelectors = [
+    const baseRevealSelectors = [
         '.article-body .cy-reveal',
         '.article-body .wp-reveal',
         '.article-body .fade-in',
@@ -310,6 +310,35 @@ function renderPost(post) {
         '.article-body .chapter',
         '.article-body .bio-section'
     ];
+
+    // 動的に記事内の<style>タグからopacity: 0が指定されているクラス名を抽出して追加します。
+    // これにより、新しいアニメーションクラスが記事ごとに作成されても自動的に検知して表示できるようになります。
+    const dynamicSelectors = new Set(baseRevealSelectors);
+    const styleRegex = /<style[^>]*>([\s\S]*?)<\/style>/gi;
+    let match;
+    while ((match = styleRegex.exec(post.content)) !== null) {
+        const styleContent = match[1];
+        const ruleRegex = /([^{}]+)\{[^{}]*opacity\s*:\s*0/gi;
+        let ruleMatch;
+        while ((ruleMatch = ruleRegex.exec(styleContent)) !== null) {
+            const selectorGroup = ruleMatch[1].trim();
+            const individualSelectors = selectorGroup.split(',');
+            individualSelectors.forEach(sel => {
+                const parts = sel.trim().split(/\s+/);
+                const lastPart = parts[parts.length - 1];
+                if (lastPart.startsWith('.') && !lastPart.includes(':')) {
+                    const dotParts = lastPart.split('.');
+                    dotParts.forEach(dp => {
+                        if (dp) {
+                            dynamicSelectors.add(`.article-body .${dp}`);
+                        }
+                    });
+                }
+            });
+        }
+    }
+
+    const revealSelectors = Array.from(dynamicSelectors);
     const revealNodes = document.querySelectorAll(revealSelectors.join(','));
     if (revealNodes.length > 0) {
         const scrollRoot = document.getElementById('main-content');
