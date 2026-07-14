@@ -312,19 +312,35 @@ function renderPost(post) {
     ];
     const revealNodes = document.querySelectorAll(revealSelectors.join(','));
     if (revealNodes.length > 0) {
+        const scrollRoot = document.getElementById('main-content');
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    entry.target.classList.add('is-visible');
                     entry.target.style.setProperty('opacity', '1', 'important');
                     entry.target.style.setProperty('visibility', 'visible', 'important');
                     entry.target.style.setProperty('transform', 'none', 'important');
                     obs.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { 
+            root: scrollRoot,
+            threshold: 0.1 
+        });
         revealNodes.forEach(node => observer.observe(node));
+
+        // フォールバック: iOSのバグなどでスクロール検知（IntersectionObserver）が正常に動かない場合、
+        // 1秒後に強制的にすべての要素を表示させて文章を読めるようにします
+        setTimeout(() => {
+            revealNodes.forEach(node => {
+                if (!node.classList.contains('visible')) {
+                    node.classList.add('visible');
+                    node.style.setProperty('opacity', '1', 'important');
+                    node.style.setProperty('visibility', 'visible', 'important');
+                    node.style.setProperty('transform', 'none', 'important');
+                }
+            });
+        }, 1000);
     }
 }
 
