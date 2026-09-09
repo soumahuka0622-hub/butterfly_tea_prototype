@@ -434,6 +434,85 @@ main {
     display: none !important;
 }
 
+/* Jakob Grinberg Article Overrides */
+.article-body .jg-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+.article-body .jg-root * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.article-body .jg-main {
+    padding: 0 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.article-body .jg-hero {
+    min-height: auto !important;
+    padding: 40px 16px 30px !important;
+}
+
+.article-body .jg-hero h1 {
+    font-size: clamp(1.4rem, 6vw, 2.2rem) !important;
+}
+
+.article-body .jg-section,
+.article-body .jg-section-wide {
+    padding: 40px 0 !important;
+}
+
+.article-body .jg-utility {
+    padding: 0.6rem 16px !important;
+}
+
+.article-body .jg-badge {
+    white-space: normal !important;
+    word-break: break-word !important;
+    max-width: 100% !important;
+    display: inline-flex !important;
+    flex-wrap: wrap !important;
+}
+
+.article-body .jg-legend-key {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.8rem !important;
+    width: 100% !important;
+}
+
+.article-body .jg-legend-key-item {
+    min-width: 0 !important;
+    width: 100% !important;
+}
+
+.article-body .jg-bio-grid,
+.article-body .jg-steps,
+.article-body .jg-evidence-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    width: 100% !important;
+}
+
+.article-body .jg-bio-card,
+.article-body .jg-step,
+.article-body .jg-fm-item,
+.article-body .jg-evidence-item {
+    min-width: 0 !important;
+    width: 100% !important;
+}
+
+.article-body .jg-lattice-wrap svg {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+
 .article-body p {
     margin-bottom: var(--spacing-lg);
 }
