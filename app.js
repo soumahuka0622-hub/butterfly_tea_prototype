@@ -308,11 +308,13 @@ function renderPost(post) {
         '.article-body .hc-reveal',
         '.article-body .km-reveal',
         '.article-body .chapter',
-        '.article-body .bio-section'
+        '.article-body .bio-section',
+        '.article-body .jg-reveal',
+        '.article-body .tr-section'
     ];
 
-    // 動的に記事内の<style>タグからopacity: 0が指定されているクラス名を抽出して追加します。
-    // これにより、新しいアニメーションクラスが記事ごとに作成されても自動的に検知して表示できるようになります。
+    // 動的に記事内の<style>タグからアニメーション用クラス名を抽出して追加します。
+    // インタラクティブ要素（#cw-root、SVG、疑似クラス付き、入力要素など）は除外します。
     const dynamicSelectors = new Set(baseRevealSelectors);
     const styleRegex = /<style[^>]*>([\s\S]*?)<\/style>/gi;
     let match;
@@ -322,6 +324,12 @@ function renderPost(post) {
         let ruleMatch;
         while ((ruleMatch = ruleRegex.exec(styleContent)) !== null) {
             const selectorGroup = ruleMatch[1].trim();
+            // コメント、キーフレームパーセンテージ、疑似クラス（:has, :checked, :hover, ::等）はスキップ
+            if (selectorGroup.startsWith('/*') || /^\d+%/.test(selectorGroup)) continue;
+            if (selectorGroup.includes(':has') || selectorGroup.includes(':checked') || selectorGroup.includes(':hover') || selectorGroup.includes('::') || selectorGroup.includes(':not')) continue;
+            // インタラクティブコンポーネント（cw-root, cwm-, svg）はスクロールアニメーション対象外
+            if (selectorGroup.includes('cw-') || selectorGroup.includes('cwm-') || selectorGroup.includes('svg')) continue;
+
             const individualSelectors = selectorGroup.split(',');
             individualSelectors.forEach(sel => {
                 const parts = sel.trim().split(/\s+/);
@@ -329,7 +337,7 @@ function renderPost(post) {
                 if (lastPart.startsWith('.') && !lastPart.includes(':')) {
                     const dotParts = lastPart.split('.');
                     dotParts.forEach(dp => {
-                        if (dp) {
+                        if (dp && !dp.startsWith('cw') && !dp.startsWith('cwm') && dp !== 'grain' && dp !== 'cw-sr') {
                             dynamicSelectors.add(`.article-body .${dp}`);
                         }
                     });
@@ -344,8 +352,14 @@ function renderPost(post) {
         const scrollRoot = document.getElementById('main-content');
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
+                // SVG内部やcw-root内の要素はインラインスタイルを上書きしない
+                if (entry.target.closest('#cw-root, svg, defs')) {
+                    obs.unobserve(entry.target);
+                    return;
+                }
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    entry.target.classList.add('is-visible');
                     entry.target.style.setProperty('opacity', '1', 'important');
                     entry.target.style.setProperty('visibility', 'visible', 'important');
                     entry.target.style.setProperty('transform', 'none', 'important');
@@ -356,14 +370,19 @@ function renderPost(post) {
             root: scrollRoot,
             threshold: 0.1 
         });
-        revealNodes.forEach(node => observer.observe(node));
+        revealNodes.forEach(node => {
+            if (!node.closest('#cw-root, svg, defs')) {
+                observer.observe(node);
+            }
+        });
 
         // フォールバック: iOSのバグなどでスクロール検知（IntersectionObserver）が正常に動かない場合、
-        // 1秒後に強制的にすべての要素を表示させて文章を読めるようにします
+        // 1秒後に強制的にすべての表示対象要素を表示させて文章を読めるようにします
         setTimeout(() => {
             revealNodes.forEach(node => {
-                if (!node.classList.contains('visible')) {
+                if (!node.closest('#cw-root, svg, defs') && !node.classList.contains('visible')) {
                     node.classList.add('visible');
+                    node.classList.add('is-visible');
                     node.style.setProperty('opacity', '1', 'important');
                     node.style.setProperty('visibility', 'visible', 'important');
                     node.style.setProperty('transform', 'none', 'important');
