@@ -243,9 +243,12 @@ function renderHome() {
 
     const otherPostsHtml = otherPosts.map(post => `
     <article class="post-item" onclick="viewPost(${post.id})">
-    <img src="${post.image}" alt="${post.title}" class="post-thumb" onerror="this.src='https://placehold.co/100x100?text=No+Image'">
+        <img src="${post.image}" alt="${post.title}" class="post-thumb" onerror="this.src='https://placehold.co/100x100?text=No+Image'">
         <div class="post-info">
-            <div class="post-meta">${post.date} | ${post.category}</div>
+            <div class="post-meta">
+                <span class="meta-date">${post.date}</span>
+                <span class="meta-tag">${post.category}</span>
+            </div>
             <h3 class="post-title">${post.title}</h3>
         </div>
     </article>
@@ -253,9 +256,17 @@ function renderHome() {
 
     mainContent.innerHTML = `
     <section class="hero-post" onclick="viewPost(${heroPost.id})">
-            <img src="${heroPost.image}" alt="${heroPost.title}" class="hero-image" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
+            <div class="hero-image-container">
+                <img src="${heroPost.image}" alt="${heroPost.title}" class="hero-image" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
+                <div class="hero-butterfly-frame" aria-hidden="true">
+                    <img src="assets/morpho-butterfly.webp" alt="Morpho Butterfly" class="morpho-butterfly-img" />
+                </div>
+            </div>
             <div class="hero-content">
-                <div class="post-meta">${heroPost.date} | ${heroPost.category}</div>
+                <div class="post-meta">
+                    <span class="meta-date">${heroPost.date}</span>
+                    <span class="meta-tag">${heroPost.category}</span>
+                </div>
                 <h2 class="hero-title">${heroPost.title}</h2>
                 <p class="hero-excerpt">${heroPost.excerpt}</p>
             </div>
@@ -271,23 +282,23 @@ function renderPost(post) {
     mainContent.innerHTML = `
     <div class="article-detail">
             <button class="back-btn" onclick="renderHome()">
-                <i class="ph ph-arrow-left"></i> Back to Home
+                <i class="ph ph-arrow-left"></i> ホームへ戻る
             </button>
             <header class="article-header">
-                <div class="article-meta-row">
-                    <span>${post.date}</span>
-                    <span>${post.category}</span>
+                <div class="post-meta" style="margin-bottom: 12px;">
+                    <span class="meta-date">${post.date}</span>
+                    <span class="meta-tag">${post.category}</span>
                 </div>
                 <h1 class="article-title">${post.title}</h1>
             </header>
             <img src="${post.image}" alt="${post.title}" class="article-image" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
             <div class="article-body">
                 ${post.content}
-                <p style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
-                    <a href="${post.link}" target="_blank" style="color: var(--accent-purple); text-decoration: underline; font-weight: bold;">
-                        公式サイトでこの記事を読む <i class="ph ph-arrow-square-out"></i>
+                <div class="official-link-wrapper">
+                    <a href="${post.link}" target="_blank" rel="noopener noreferrer" class="official-cta-btn">
+                        <span>公式サイトでこの記事を読む</span> <i class="ph ph-arrow-square-out"></i>
                     </a>
-                </p>
+                </div>
             </div>
         </div>
     `;
@@ -434,38 +445,41 @@ function renderCategoryPosts(categoryName) {
 
     if (filteredPosts.length === 0) {
         mainContent.innerHTML = `
-    <div class="categories-view">
-                <button class="back-btn" onclick="renderCategories()">
-                    <i class="ph ph-arrow-left"></i> Back to Categories
-                </button>
-                <h2 class="section-title">${categoryName}</h2>
-                <div class="no-posts">
-                    <p>No posts found in this category.</p>
-                </div>
+        <div class="categories-view">
+            <button class="back-btn" onclick="renderCategories()">
+                <i class="ph ph-arrow-left"></i> カテゴリ一覧へ戻る
+            </button>
+            <h2 class="section-title">${categoryName}</h2>
+            <div class="no-posts">
+                <p>このカテゴリの記事は見つかりませんでした。</p>
             </div>
-    `;
+        </div>
+        `;
     } else {
         const postsHtml = filteredPosts.map(post => `
-    <article class="post-item" onclick="viewPost(${post.id})">
-        <img src="${post.image}" alt="${post.title}" class="post-thumb" onerror="this.src='https://placehold.co/100x100?text=No+Image'">
+        <article class="post-item" onclick="viewPost(${post.id})">
+            <img src="${post.image}" alt="${post.title}" class="post-thumb" onerror="this.src='https://placehold.co/100x100?text=No+Image'">
             <div class="post-info">
-                <div class="post-meta">${post.date} | ${post.category}</div>
+                <div class="post-meta">
+                    <span class="meta-date">${post.date}</span>
+                    <span class="meta-tag">${post.category}</span>
+                </div>
                 <h3 class="post-title">${post.title}</h3>
             </div>
         </article>
-`).join('');
+        `).join('');
 
         mainContent.innerHTML = `
-    <div class="post-list-view">
-                <button class="back-btn" onclick="renderCategories()">
-                    <i class="ph ph-arrow-left"></i> Back to Categories
-                </button>
-                <h2 class="section-title">${categoryName}</h2>
-                <div class="post-list">
-                    ${postsHtml}
-                </div>
+        <div class="post-list-view">
+            <button class="back-btn" onclick="renderCategories()">
+                <i class="ph ph-arrow-left"></i> カテゴリ一覧へ戻る
+            </button>
+            <h2 class="section-title">${categoryName}</h2>
+            <div class="post-list">
+                ${postsHtml}
             </div>
-    `;
+        </div>
+        `;
     }
     window.scrollTo(0, 0);
 }
@@ -473,30 +487,35 @@ function renderCategoryPosts(categoryName) {
 function renderAbout() {
     mainContent.innerHTML = `
     <div class="article-detail">
-            <h1 class="article-title">About</h1>
-            <div class="article-body">
-                <p><strong>Blog Title:</strong> with the dawn breaking</p>
-                <p><strong>Theme:</strong> スピリチュアル×哲学×神話で読み解く現代の魂</p>
-                
-                <h3>Administrator</h3>
-                <p><strong>Name:</strong> ma_（ま）</p>
-                <p>趣味は絵を描くこと。</p>
+        <h1 class="article-title" style="margin-bottom: 24px;">About</h1>
+        <div class="article-body">
+            <p><strong>Blog Title:</strong> with the dawn breaking</p>
+            <p><strong>Theme:</strong> スピリチュアル × 哲学 × 神話で読み解く現代の魂</p>
+            
+            <h3 style="margin-top: 32px;">Administrator</h3>
+            <p><strong>Name:</strong> ma_（ま）</p>
+            <p>趣味は絵を描くこと。</p>
 
-                <h3>Publication</h3>
-                <div style="text-align: center; margin: 20px 0;">
-                    <img src="https://m.media-amazon.com/images/I/81rjGtj99IL._SX445_.jpg" alt="Book Cover" style="width: 150px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    <p style="margin-top: 10px; font-size: 0.9rem;">
-                        『蝶とお茶の間で考える、心と世界』<br>
-                        <a href="https://www.amazon.co.jp/dp/B0FSF24GB4" target="_blank" style="color: var(--accent-purple);">Amazonで見る</a>
-                    </p>
-                </div>
-
-                <p style="margin-top: 30px; font-size: 0.8rem; color: var(--text-secondary);">
-                    This is a reader prototype for <a href="https://butterflyandtea.com/" target="_blank" style="color: var(--accent-purple);">butterflyandtea.com</a>.
+            <h3 style="margin-top: 32px;">Publication</h3>
+            <div style="text-align: center; margin: 24px 0; padding: 24px 16px; background: var(--color-lavender-light); border-radius: 16px; border: 1px solid var(--color-border);">
+                <img src="https://m.media-amazon.com/images/I/81rjGtj99IL._SX445_.jpg" alt="Book Cover" style="width: 150px; border-radius: 10px; box-shadow: var(--shadow-card); margin: 0 auto; display: block;">
+                <p style="margin-top: 14px; font-size: 0.95rem; font-weight: 600; color: var(--color-primary-dark);">
+                    『蝶とお茶の間で考える、心と世界』
                 </p>
+                <div style="margin-top: 16px;">
+                    <a href="https://www.amazon.co.jp/dp/B0FSF24GB4" target="_blank" rel="noopener noreferrer" class="official-cta-btn">
+                        <span>Amazonで見る</span> <i class="ph ph-arrow-square-out"></i>
+                    </a>
+                </div>
             </div>
+
+            <p style="margin-top: 30px; font-size: 0.82rem; color: var(--color-text-secondary); text-align: center;">
+                This is a reader prototype for <a href="https://butterflyandtea.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); font-weight: 500;">butterflyandtea.com</a>.
+            </p>
         </div>
+    </div>
     `;
+    window.scrollTo(0, 0);
 }
 
 // Global expose for onclick handlers
