@@ -657,12 +657,7 @@ main {
 .article-body {
     font-size: 1rem;
     line-height: 2;
-    color: var(--text-primary);
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    color: #4A3F5C;
 }
 
 .article-body *,
@@ -841,40 +836,20 @@ main {
 }
 
 
-.article-body p {
-    margin-bottom: var(--spacing-lg);
-    color: var(--color-text);
+.article-body p,
+.article-body li {
+   color: #4A3F5C;
 }
 
-.article-body h2 {
-    font-size: 1.35rem;
-    color: var(--color-primary-dark);
-    border-left: 4px solid var(--color-primary);
-    padding-left: var(--spacing-md);
-    margin: 40px 0 20px;
-    line-height: 1.45;
-    font-weight: 700;
-}
-
+.article-body h2,
 .article-body h3 {
-    font-size: 1.15rem;
     color: var(--color-primary-dark);
-    border-bottom: 1.5px solid var(--color-border);
-    padding-bottom: var(--spacing-xs);
-    margin: 30px 0 15px;
-    line-height: 1.45;
-    font-weight: 600;
 }
 
 .article-body ul,
 .article-body ol {
     margin-bottom: var(--spacing-lg);
     padding-left: var(--spacing-lg);
-}
-
-.article-body li {
-    margin-bottom: var(--spacing-sm);
-    color: var(--color-text);
 }
 
 .article-body blockquote {
@@ -889,8 +864,6 @@ main {
 
 .article-body strong {
     color: var(--color-primary-dark);
-    font-weight: 700;
-    background: linear-gradient(transparent 65%, rgba(233, 213, 255, 0.7) 65%);
 }
 
 .article-body a {
